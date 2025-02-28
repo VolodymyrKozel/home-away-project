@@ -2,8 +2,16 @@ import EmptyList from "@/components/home/EmptyList";
 import PropertiesList from "@/components/home/PropertiesList";
 import { fetchFavorites } from "@/utils/actions";
 
-const FavoritesPage = async () => {
-  const favorites = await fetchFavorites();
+interface FavoritesPageProps {
+  searchParams: {
+    search?: string;
+  };
+}
+
+const FavoritesPage = async ({
+  searchParams: { search },
+}: FavoritesPageProps) => {
+  const favorites = await fetchFavorites({ search });
 
   return favorites.length === 0 ? (
     <EmptyList />
